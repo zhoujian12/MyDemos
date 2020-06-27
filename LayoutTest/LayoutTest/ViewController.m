@@ -124,15 +124,17 @@ typedef struct {
     _textField = [[UITextField alloc] init];
     _textField.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_textField];
+    _textField.backgroundColor = [UIColor orangeColor];
     [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
         make.right.mas_equalTo(-20);
-        make.bottom.mas_equalTo(flexBoxButton.mas_top);
+//        make.bottom.mas_equalTo(flexBoxButton.mas_top);
+        make.top.mas_equalTo(self.view).offset(100);
         make.height.mas_equalTo(20);
     }];
     
     _indicateLabel = [[UILabel alloc] init];
-    _indicateLabel.textColor = [UIColor blackColor];
+    _indicateLabel.textColor = [UIColor blueColor];
     _indicateLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:_indicateLabel];
     [_indicateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -183,7 +185,7 @@ typedef struct {
 }
 -(TestFrame)getStruct{
     
-    CGRect frame =(CGRect) { 
+    CGRect frame =(CGRect) {
         .origin = (CGPoint){ .x =1,.y =1,},
         .size   = (CGSize){  .width = 1, .height=1},
     };
@@ -214,21 +216,22 @@ typedef struct {
     };
 }
 
+#pragma mark AutoLayout 非嵌套
 - (void)generateViews {
     
-    Method method = class_getInstanceMethod(self.class, @selector(getNumStruct));
-    const char *encoding = method_getTypeEncoding(method);
-    
-    NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:encoding];
-    NSLog(@"debug Desc %@",methodSignature.debugDescription);
-    
-    NSUInteger valueSize = 0;
-    NSGetSizeAndAlignment(encoding, &valueSize, NULL);
-    
-    return;
+//    Method method = class_getInstanceMethod(self.class, @selector(getNumStruct));
+//    const char *encoding = method_getTypeEncoding(method);
+//
+//    NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:encoding];
+//    NSLog(@"debug Desc %@",methodSignature.debugDescription);
+//
+//    NSUInteger valueSize = 0;
+//    NSGetSizeAndAlignment(encoding, &valueSize, NULL);
+//
+//    return;
     NSInteger number = _textField.text.integerValue;
     
-    for (int i=0; i<100 ;i++) {
+//    for (int i=0; i<100 ;i++) {
         
         
         for (UIView *view in _views) {
@@ -284,7 +287,7 @@ typedef struct {
         
         _indicateLabel.text = [NSString stringWithFormat:@"%ld: %f", (long)number, endTime-startTime];
         
-    }
+//    }
 }
 
 #pragma mark Frame 非嵌套
@@ -334,7 +337,7 @@ typedef struct {
 #pragma mark AutoLayout 嵌套
 - (void)generateNestedViews {
     NSInteger number = _textField.text.integerValue;
-    for (int i=0; i<100 ;i++) {
+//    for (int i=0; i<100 ;i++) {
         
         for (UIView *view in _views) {
             [view removeFromSuperview];
@@ -394,14 +397,14 @@ typedef struct {
         [autoLayoutDictionary setObject:currentTimesDictionary forKey:@(number)];
         
         _indicateLabel.text = [NSString stringWithFormat:@"%ld: %f", (long)number, endTime-startTime];
-    }
+//    }
 }
 
 #pragma mark Frame 嵌套
 - (void)generateNestedFrameViews {
     NSInteger number = _textField.text.integerValue;
     
-    for (int i=0; i<100 ;i++) {
+//    for (int i=0; i<100 ;i++) {
         
         for (UIView *view in _views) {
             [view removeFromSuperview];
@@ -456,13 +459,13 @@ typedef struct {
         [autoLayoutDictionary setObject:currentTimesDictionary forKey:@(number)];
         
         _indicateLabel.text = [NSString stringWithFormat:@"%ld: %f", (long)number, endTime-startTime];
-    }
+//    }
 }
 
 #pragma mark FlexBox 非嵌套
 - (void)generateFlexBoxViews {
     NSInteger number = _textField.text.integerValue;
-    for (int i=0; i<100 ;i++) {
+//    for (int i=0; i<100 ;i++) {
         
         for (UIView *view in _views) {
             [view removeFromSuperview];
@@ -507,7 +510,7 @@ typedef struct {
         [frameDictionary setObject:currentTimesDictionary forKey:@(number)];
         
         _indicateLabel.text = [NSString stringWithFormat:@"%ld: %f", (long)number, endTime-startTime];
-    }
+//    }
     
 }
 
@@ -516,7 +519,7 @@ typedef struct {
     
     NSInteger number = _textField.text.integerValue;
     
-    for (int i=0; i<100 ;i++) {
+//    for (int i=0; i<100 ;i++) {
         
         for (UIView *view in _views) {
             [view removeFromSuperview];
@@ -592,7 +595,7 @@ typedef struct {
         [autoLayoutDictionary setObject:currentTimesDictionary forKey:@(number)];
         
         _indicateLabel.text = [NSString stringWithFormat:@"%ld: %f", (long)number, endTime-startTime];
-    }
+//    }
 }
 
 #pragma mark Other
